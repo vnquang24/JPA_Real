@@ -50,40 +50,30 @@ src/main/java/com/example/jpa/
 - **StudentDTO**: Transfer object cho Student
 
 ## Cấu hình Database
+- Tạo file .env từ .env.example
+- Cấu hình tên DB, tài khoản mật khẩu postgreSQL ở file .env
 
-### PostgreSQL
-- Host: localhost:5434
-- Database: spring_core
-- Username: postgres
-- Password: 123456
-
-### Cấu hình trong application.properties
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5434/spring_core
-spring.datasource.username=postgres
-spring.datasource.password=123456
-spring.datasource.driver-class-name=org.postgresql.Driver
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-```
+### Cấu hình application.properties
+- Copy từ template sang application.properties
 
 ## Cách chạy
 
-### 1. Khởi động PostgreSQL
+### 1. Sử dụng Docker Compose (Khuyến nghị)
 ```bash
-# Kiểm tra status
-sudo systemctl status postgresql
+# Khởi động PostgreSQL với Docker Compose
+docker-compose up -d
 
-# Khởi động
-sudo systemctl start postgresql
+# Kiểm tra trạng thái container
+docker-compose ps
 
-# Hoặc sử dụng Docker
-docker run --name postgres-jpa -e POSTGRES_PASSWORD=123456 -e POSTGRES_DB=spring_core -p 5434:5432 -d postgres
-```
+# Xem logs
+docker-compose logs postgres
 
-### 2. Tạo database
-```sql
-CREATE DATABASE spring_core;
+# Dừng container
+docker-compose down
+
+# Dừng và xóa volume (xóa dữ liệu)
+docker-compose down -v
 ```
 
 ### 3. Chạy ứng dụng
@@ -94,21 +84,3 @@ CREATE DATABASE spring_core;
 # Hoặc sử dụng Maven
 mvn clean compile exec:java -Dexec.mainClass="com.example.jpa.JpaApplication"
 ```
-
-## Cải tiến so với phiên bản cũ
-
-1. **Cấu trúc package rõ ràng**: Tách biệt entity, repository, service, dto
-2. **Repository mở rộng**: Thêm các method tìm kiếm và custom query
-3. **Service layer cải tiến**: Thêm validation và business logic
-4. **DTO pattern**: Tách biệt data transfer và entity
-5. **Exception handling**: Custom exception cho resource not found
-6. **Demo mở rộng**: Thêm demo tìm kiếm
-
-## Dependencies
-
-- Spring Core 5.3.30
-- Spring Data JPA 2.7.18
-- Hibernate 5.6.15.Final
-- PostgreSQL Driver 42.7.0
-- Jackson 2.15.2
-- JUnit 5.10.0 
