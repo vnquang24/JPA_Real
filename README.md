@@ -66,17 +66,7 @@ docker-compose up -d
 # Kiểm tra trạng thái container
 docker-compose ps
 
-# Xem logs
-docker-compose logs postgres
-
-# Dừng container
-docker-compose down
-
-# Dừng và xóa volume (xóa dữ liệu)
-docker-compose down -v
-```
-
-### 3. Chạy ứng dụng
+### 2. Chạy ứng dụng
 ```bash
 # Sử dụng Maven Wrapper
 ./mvnw clean compile exec:java -Dexec.mainClass="com.example.jpa.JpaApplication"
