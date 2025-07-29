@@ -12,22 +12,19 @@ public class JpaApplication {
             StandaloneConfig.class
         );
         
-        System.out.println("Spring Core JPA Application started successfully!");
-        System.out.println("Available beans:");
+        System.out.println("DANH SÁCH BEANS ĐÃ ĐĂNG KÝ: \n");
         for (String beanName : context.getBeanDefinitionNames()) {
-            System.out.println("- " + beanName);
+            System.out.println("   - " + beanName);
         }
         
-        // Run CRUD demo
         try {
             CrudDemo crudDemo = context.getBean(CrudDemo.class);
             crudDemo.demonstrateCrudOperations();
+
         } catch (Exception e) {
-            System.err.println("Error running CRUD demo: " + e.getMessage());
+            System.err.println("Lỗi khi chạy demo: " + e.getMessage());
             e.printStackTrace();
-        }
-        
-        // Keep the application running
+        }    
         context.registerShutdownHook();
     }
 } 
