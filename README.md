@@ -17,9 +17,12 @@ src/main/java/com/example/jpa/
 ├── repository/       # Repository interfaces
 │   ├── CourseRepository.java
 │   └── StudentRepository.java
-├── service/          # Service classes
+├── service/          # Service interfaces
 │   ├── CourseService.java
-│   └── StudentService.java
+│   ├── StudentService.java
+│   └── impl/         # Service implementations
+│       ├── CourseServiceImpl.java
+│       └── StudentServiceImpl.java
 ├── dto/              # Data Transfer Objects
 │   ├── CourseDTO.java
 │   └── StudentDTO.java
@@ -38,12 +41,13 @@ src/main/java/com/example/jpa/
 - **Many-to-Many**: Quan hệ giữa Student và Course
 
 ### Repository
+- **BaseRepository**: Interface cơ bản thay thế JpaRepository
 - **CourseRepository**: CRUD + tìm kiếm theo tên, mô tả
 - **StudentRepository**: CRUD + tìm kiếm theo tên, email
 
 ### Service
-- **CourseService**: Business logic cho Course
-- **StudentService**: Business logic cho Student + quản lý quan hệ
+- **CourseService/StudentService**: Interface định nghĩa business logic
+- **CourseServiceImpl/StudentServiceImpl**: Implementation với validation và transaction
 
 ### DTO
 - **CourseDTO**: Transfer object cho Course

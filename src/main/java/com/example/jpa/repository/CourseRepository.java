@@ -1,7 +1,6 @@
 package com.example.jpa.repository;
 
 import com.example.jpa.entity.Course;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -9,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Long> {
+public interface CourseRepository extends BaseRepository<Course, Long> {
     
     // Tìm kiếm theo tên
     Optional<Course> findByName(String name);
@@ -27,4 +27,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     
     // Đếm số khóa học
     long countByName(String name);
+    
+    // Kiểm tra tồn tại theo tên
+    boolean existsByName(String name);
 } 

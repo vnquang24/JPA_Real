@@ -18,7 +18,13 @@ public class Student {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(
+        fetch = FetchType.LAZY,
+        cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+        }
+    )
     @JoinTable(
         name = "student_course",
         joinColumns = @JoinColumn(name = "student_id"),
@@ -42,4 +48,15 @@ public class Student {
 
     public Set<Course> getCourses() { return courses; }
     public void setCourses(Set<Course> courses) { this.courses = courses; }
+    
+    // Helper methods
+    public void addCourse(Course course) {
+        this.courses.add(course);
+        course.getStudents().add(this);
+    }
+    
+    public void removeCourse(Course course) {
+        this.courses.remove(course);
+        course.getStudents().remove(this);
+    }
 } 
